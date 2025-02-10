@@ -1,0 +1,70 @@
+@use '../../styles/colors' as *;
+.Card {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  .Card-cover {
+    cursor: pointer;
+    height: 190px;
+    object-fit: cover;
+  }
+  .Card-heart {
+    width: 10px;
+  }
+  .Card-footer {
+    background: linear-gradient(315deg, transparent 12px, $black 12px);
+    padding: 16px 16px 24px 16px;
+    border-top: 5px solid $red;
+    display: flex;
+    .Card-footer__left {
+      width: calc(100% - 14px);
+      p {
+        line-height: 24px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $white;
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+    .Card-footer__right {
+      margin-left: 4px;
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) {
+  .Card {
+    width: calc(14.28571% - 16px);
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1024px) {
+  .Card {
+    width: calc(25% - 16px);
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .Card {
+    width: calc(50% - 16px);
+    img {
+      width: 100%;
+    }
+  }
+}

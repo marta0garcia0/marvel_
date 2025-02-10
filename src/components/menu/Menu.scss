@@ -1,0 +1,21 @@
+@use '../../styles/colors' as *;
+.Menu {
+  width: 100%;
+}
+.Menu-wrapper {
+  background-color: $black;
+  display: flex;
+  height: 84px;
+  align-items: center;
+  padding: 16px 48px;
+}
+.Likes-container {
+  margin-left: auto;
+  padding: 8px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .Likes-container {
+    margin-left: auto;
+    padding-right: 0px;
+  }
+}

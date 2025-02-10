@@ -1,0 +1,22 @@
+@use '../../styles/colors' as *;
+.FavList {
+  padding: 16px 34px;
+}
+.FavList-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.FavList-body__title p {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+}
+.FavList-body__title {
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 6px;
+}
+.FavList-body {
+  margin: auto;
+  margin-bottom: 20px;
+}

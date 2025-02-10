@@ -1,0 +1,16 @@
+@use '../../styles/colors' as *;
+.Heart {
+  padding: 0 8px;
+  display: flex;
+  .Heart-text {
+    padding-left: 8px;
+    font-size: 16px;
+    color: $white;
+  }
+  img {
+    cursor: pointer;
+  }
+  img:hover {
+    opacity: 0.7;
+  }
+}

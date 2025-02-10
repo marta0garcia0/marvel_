@@ -1,0 +1,34 @@
+@import './../../styles/colors.scss';
+.CharacterList {
+  padding: 16px 34px;
+}
+.CharacterList-filter {
+  margin: 0 6px;
+  font-size: 12px;
+}
+.CharacterList-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.CharacterList-more {
+  display: flex;
+  align-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.CharacterList-more__button {
+  margin: auto;
+  padding: 5px 20px;
+  background: linear-gradient(315deg, transparent 4px, $red 4px);
+  color: $white;
+  border: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.CharacterList-loading {
+  display: flex;
+  margin-bottom: 20px;
+  img {
+    margin: auto;
+  }
+}

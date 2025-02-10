@@ -1,0 +1,126 @@
+@use '../../styles/colors' as *;
+.CharacterInfo {
+  margin-bottom: 30px;
+
+  .Character-header {
+    background: linear-gradient(315deg, transparent 12px, $black 12px);
+  }
+  .Character-header__container {
+    display: flex;
+    flex-direction: column;
+  }
+  .Character-header__wrapper {
+    flex-grow: 1;
+    padding: 24px 16px 48px 16px;
+  }
+  .Character-header__title {
+    display: flex;
+    p {
+      width: calc(100% - 24px);
+      color: $white;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0px;
+    }
+    img {
+      cursor: pointer;
+      width: 24px;
+    }
+    .Character-header__text {
+      flex-grow: 1;
+    }
+    .Character-header__icon {
+      width: 50px;
+    }
+  }
+  .Character-header__description {
+    p {
+      color: $white;
+      font-size: 16px;
+    }
+  }
+  .Character-body__title p {
+    margin-bottom: 20px;
+  }
+  .Character-body__title {
+    font-weight: 700;
+    font-size: 32px;
+  }
+  .Character-comic__legend {
+    width: 180px;
+    margin-bottom: 32px;
+
+    .Character-comic__legend-title {
+      font-weight: 500;
+      height: 46px;
+      margin: 0px;
+      font-size: 16px;
+    }
+    .Character-comic__legend-date {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+  .Character-body__list {
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-color: $red;
+
+    .Character-body__comic {
+      margin-right: 12px;
+      img {
+        width: 180px;
+        height: 269px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .CharacterInfo {
+    .Character-header__cover {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+    }
+    .Character-header__container {
+      max-width: 960px;
+      flex-direction: row;
+      margin: auto;
+    }
+    .Character-body {
+      max-width: 960px;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+    .Character-header__wrapper {
+      padding: 48px 0 0 48px;
+    }
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1024px) {
+  .CharacterInfo {
+    .Character-header__cover {
+      width: 278px;
+      height: 278px;
+      object-fit: cover;
+    }
+    .Character-header__container {
+      flex-direction: row;
+    }
+    .Character-header__wrapper {
+      padding: 48px 0 0 48px;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .CharacterInfo {
+    .Character-header__cover {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+}
