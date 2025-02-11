@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.scss';
-import { AuthProvider } from './context/AuthContext';
-import { FavProvider } from './context/FavContext.tsx';
-import { CharacterProvider } from './context/CharactersContext.tsx';
+import { AuthProvider } from './context/auth/AuthContext.tsx';
+import { FavProvider } from './context/fav/FavContext.tsx';
+import { CharacterProvider } from './context/characters/CharactersContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

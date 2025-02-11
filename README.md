@@ -24,10 +24,10 @@ To run the app in production mode url: http://127.0.0.1:8080
 ```bash
 npm install http-server
 npm run build
-http-server dist marvel
+http-server dist
 ```
 
-Or on github: https://github.com/marta0garcia0/marvel
+Or on github: https://github.com/marta0garcia0/marvel_
 
 To execute tests
 
@@ -57,3 +57,9 @@ SPA with React managing client-side rendering, handles routing using react-route
   ├── index.tsx
 
 ```
+
+For the filter there is a bouncing time of 1 second to limit the number of request, it can be changed in the constants file
+There is a limit of request to 50 items also in the constant file
+
+The context storages the list of items without filter so the data is not rerendered
+when the filter is removed

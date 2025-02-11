@@ -10,7 +10,7 @@ html,
 body {
   ::-webkit-scrollbar {
     height: 4px;
-    width: 4px;
+    width: 0px;
   }
   ::-webkit-scrollbar-thumb:horizontal {
     background-color: $red;

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/auth/AuthContext';
 import { getCharacter, getComics } from '../../services/api';
 import { useEffect, useState } from 'react';
 import {
@@ -7,7 +7,7 @@ import {
   CharacterResponse,
   ComicResponse,
 } from '../../services/models';
-import { useFav } from '../../context/FavContext';
+import { useFav } from '../../context/fav/FavContext';
 import heartFull from './../../assets/heart-full.svg';
 import heartEmpty from './../../assets/heart-empty.svg';
 import loader from './../../assets/spinner.svg';
@@ -74,7 +74,7 @@ function CharacterInfo() {
               <div>
                 <div className="Character-header__title">
                   <div className="Character-header__text">
-                    <p>{character.name}</p>
+                    <span>{character.name}</span>
                   </div>
                   <div className="Character-header__icon">
                     <img
@@ -86,43 +86,44 @@ function CharacterInfo() {
                   </div>
                 </div>
               </div>
-
               <div className="Character-header__description">
-                <p>{character.description}</p>
+                <span>{character.description}</span>
               </div>
             </div>
           </div>
         </div>
       ) : null}
       {comics ? (
-        <div className="Character-body">
-          <div className="Character-body__title">
-            <p>COMICS</p>
-          </div>
-          <div className="Character-body__list">
-            {comics.results.map(comic => {
-              return (
-                <div key={comic.id} className="Character-body__comic">
-                  <div>
-                    <img
-                      className="Character-comic__cover"
-                      src={
-                        comic.thumbnail.path + '.' + comic.thumbnail.extension
-                      }
-                      alt={'like'}
-                    />
+        <div className="Character-body__container">
+          <div className="Character-body">
+            <div className="Character-body__title">
+              <p>COMICS</p>
+            </div>
+            <div className="Character-body__list">
+              {comics.results.map(comic => {
+                return (
+                  <div key={comic.id} className="Character-body__comic">
+                    <div>
+                      <img
+                        className="Character-comic__cover"
+                        src={
+                          comic.thumbnail.path + '.' + comic.thumbnail.extension
+                        }
+                        alt={'comic-like'}
+                      />
+                    </div>
+                    <div className="Character-comic__legend">
+                      <p className="Character-comic__legend-title">
+                        {comic.title}
+                      </p>
+                      <p className="Character-comic__legend-date">
+                        {new Date(comic.modified).getFullYear()}
+                      </p>
+                    </div>
                   </div>
-                  <div className="Character-comic__legend">
-                    <p className="Character-comic__legend-title">
-                      {comic.title}
-                    </p>
-                    <p className="Character-comic__legend-date">
-                      {new Date(comic.modified).getFullYear()}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (

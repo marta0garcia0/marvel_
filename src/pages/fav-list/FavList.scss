@@ -1,10 +1,17 @@
 @use '../../styles/colors' as *;
 .FavList {
-  padding: 16px 34px;
+  padding: 20px 48px;
+  .FavList-filter {
+    margin: 0px;
+    font-size: 12px;
+    color: $black;
+  }
 }
 .FavList-cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 24px;
 }
 .FavList-body__title p {
   margin-bottom: 20px;

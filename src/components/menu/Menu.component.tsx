@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { useFav } from '../../context/FavContext';
+import { useFav } from '../../context/fav/FavContext';
 import { useNavigate } from 'react-router-dom';
 import logo from './../../assets/marvel-logo.svg';
-import Heart from '../heart/Heart';
+import { HeartComponent } from '../heart/Heart.component';
 import { BASE_URL } from '../../constants';
 import './Menu.scss';
 
@@ -22,9 +22,11 @@ export const MenuComponent: React.FC<{ children: ReactNode }> = ({
           height={52}
         />
         <div className="Likes-container">
-          <Heart
+          <HeartComponent
             likes={favs.length}
-            onClick={() => navigate(`${BASE_URL}favorites`, { replace: true })}
+            onClick={() => {
+              navigate(`${BASE_URL}favorites`, { replace: true });
+            }}
           />
         </div>
       </div>

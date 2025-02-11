@@ -1,43 +1,60 @@
 @use '../../styles/colors' as *;
 .CharacterInfo {
   margin-bottom: 30px;
-
+  .Character-header__cover {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
   .Character-header {
     background: linear-gradient(315deg, transparent 12px, $black 12px);
+    .Character-header__container {
+      display: flex;
+      flex-direction: column;
+      .Character-header__wrapper {
+        flex-grow: 1;
+        padding: 24px 16px 48px 16px;
+        .Character-header__title {
+          display: flex;
+          flex-direction: row;
+          .Character-header__text {
+            width: calc(100% - 24px);
+            span {
+              width: calc(100% - 24px);
+              color: $white;
+              font-size: 32px;
+              text-transform: uppercase;
+              font-weight: 700;
+              margin: 0px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+          img {
+            cursor: pointer;
+            width: 24px;
+          }
+          .Character-header__text {
+            flex-grow: 1;
+          }
+          .Character-header__icon {
+            width: 50px;
+            margin: auto;
+          }
+        }
+      }
+
+      .Character-header__description {
+        span {
+          color: $white;
+          font-size: 16px;
+        }
+      }
+    }
   }
-  .Character-header__container {
-    display: flex;
-    flex-direction: column;
-  }
-  .Character-header__wrapper {
-    flex-grow: 1;
-    padding: 24px 16px 48px 16px;
-  }
-  .Character-header__title {
-    display: flex;
-    p {
-      width: calc(100% - 24px);
-      color: $white;
-      font-size: 32px;
-      font-weight: 700;
-      margin: 0px;
-    }
-    img {
-      cursor: pointer;
-      width: 24px;
-    }
-    .Character-header__text {
-      flex-grow: 1;
-    }
-    .Character-header__icon {
-      width: 50px;
-    }
-  }
-  .Character-header__description {
-    p {
-      color: $white;
-      font-size: 16px;
-    }
+
+  .Character-body__container {
+    padding-bottom: 40px;
   }
   .Character-body__title p {
     margin-bottom: 20px;
@@ -45,6 +62,8 @@
   .Character-body__title {
     font-weight: 700;
     font-size: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .Character-comic__legend {
     width: 180px;
@@ -55,13 +74,20 @@
       height: 46px;
       margin: 0px;
       font-size: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Limits to 2 lines */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .Character-comic__legend-date {
       font-size: 12px;
       font-weight: 400;
+      margin-top: 8px;
     }
   }
   .Character-body__list {
+    padding: 6px;
     display: flex;
     overflow-x: scroll;
     scrollbar-color: $red;
@@ -76,6 +102,44 @@
   }
 }
 
+@media (min-width: 767px) {
+  .CharacterInfo {
+    .Character-header__cover {
+      width: 278px;
+      height: 278px;
+      object-fit: cover;
+    }
+
+    .Character-header {
+      max-width: 100%;
+
+      .Character-header__container {
+        display: flex;
+        flex-direction: row;
+        .Character-header__wrapper {
+          .Character-header__title {
+            .Character-header__icon {
+              width: 24px;
+              margin: auto;
+            }
+          }
+        }
+        .Character-header__picture {
+          width: 278px;
+          height: 278px;
+
+          .Character-header__cover {
+            object-fit: cover;
+          }
+        }
+        .Character-header__wrapper {
+          padding: 48px;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 1025px) {
   .CharacterInfo {
     .Character-header__cover {
@@ -83,44 +147,32 @@
       height: 320px;
       object-fit: cover;
     }
-    .Character-header__container {
-      max-width: 960px;
-      flex-direction: row;
-      margin: auto;
+    .Character-header {
+      height: 320px;
+      .Character-header__container {
+        max-width: 960px;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        .Character-header__wrapper {
+          padding: 56px 0 0 48px;
+        }
+        .Character-header__picture {
+          width: 320px;
+        }
+      }
     }
     .Character-body {
       max-width: 960px;
       margin: auto;
       margin-bottom: 20px;
     }
-    .Character-header__wrapper {
-      padding: 48px 0 0 48px;
-    }
-  }
-}
 
-@media (min-width: 767px) and (max-width: 1024px) {
-  .CharacterInfo {
-    .Character-header__cover {
-      width: 278px;
-      height: 278px;
-      object-fit: cover;
-    }
-    .Character-header__container {
-      flex-direction: row;
-    }
-    .Character-header__wrapper {
-      padding: 48px 0 0 48px;
-    }
-  }
-}
-
-@media (min-width: 320px) and (max-width: 767px) {
-  .CharacterInfo {
-    .Character-header__cover {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
+    .Character-header__title {
+      display: flex;
+      span {
+        font-size: 40px;
+      }
     }
   }
 }

@@ -59,6 +59,12 @@ export type CharacterResponse = {
   count: number;
   results: Character[];
 };
+export type CharacterMetadataResponse = {
+  offset: number;
+  limit: number;
+  total: number;
+  count: number;
+};
 export interface CharacterResponseAPI {
   code: number;
   status: string;

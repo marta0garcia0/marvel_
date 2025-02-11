@@ -1,6 +1,5 @@
 @use '../../styles/colors' as *;
 .Card {
-  padding: 8px;
   display: flex;
   flex-direction: column;
   .Card-cover {
@@ -12,26 +11,39 @@
     width: 10px;
   }
   .Card-footer {
-    background: linear-gradient(315deg, transparent 12px, $black 12px);
-    padding: 16px 16px 24px 16px;
     border-top: 5px solid $red;
-    display: flex;
-    .Card-footer__left {
-      width: calc(100% - 14px);
-      p {
-        line-height: 24px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: $white;
-        font-size: 14px;
-        margin: 0;
+    .Card-footer__curtain {
+      display: flex;
+      padding: 12px 16px 16px 16px;
+      background: linear-gradient(to bottom, black 50%, $red 50%);
+      background-size: 100% 200%;
+      background-position: 0 0;
+      transition: background-position 0.5s ease-in-out;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
+      .Card-footer__left {
+        width: calc(100% - 14px);
+        p {
+          line-height: 24px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $white;
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+      .Card-footer__right {
+        margin-left: 4px;
+        img {
+          cursor: pointer;
+        }
       }
     }
-    .Card-footer__right {
-      margin-left: 4px;
-      img {
-        cursor: pointer;
+    .Card-footer__curtain:hover {
+      background-position: 0 -100%;
+      .Card-heart.full {
+        filter: invert(100%) brightness(100%);
+        transition: 0.5s ease-in-out;
       }
     }
   }
@@ -44,7 +56,7 @@
 
 @media (min-width: 1025px) {
   .Card {
-    width: calc(14.28571% - 16px);
+    width: calc(14.286% - 13.71428px);
     img {
       width: 100%;
     }
@@ -53,18 +65,28 @@
 
 @media (min-width: 767px) and (max-width: 1024px) {
   .Card {
-    width: calc(25% - 16px);
+    width: calc(25% - 12px);
     img {
       width: 100%;
+    }
+    .Card-footer {
+      .Card-footer__curtain {
+        clip-path: polygon(0 0, 100% 0, 100% 75%, 92% 100%, 0 100%);
+      }
     }
   }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
   .Card {
-    width: calc(50% - 16px);
+    width: calc(50% - 8px);
     img {
       width: 100%;
+    }
+    .Card-footer {
+      .Card-footer__curtain {
+        clip-path: polygon(0 0, 100% 0, 100% 70%, 92% 100%, 0 100%);
+      }
     }
   }
 }

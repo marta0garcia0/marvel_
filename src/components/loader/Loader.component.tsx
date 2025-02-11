@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import loader from './../../assets/spinner.svg';
 import './Loader.scss';
 
-export const Loader = (props: { url: string }) => {
+export const LoaderComponent = (props: { url: string }) => {
   const navigate = useNavigate();
 
   useEffect(() => {

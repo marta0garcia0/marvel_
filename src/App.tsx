@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CharacterInfo from './pages/character-info/CharacterInfo.component';
-import CharacterList from './pages/character-list/CharacterList.component';
-import FavListPage from './pages/fav-list/FavList.component';
-import { MenuComponent } from './components/menu/Menu';
-import { Loader } from './components/loader/Loader';
-import { useAuth } from './context/AuthContext';
+import CharacterInfo from './pages/character-info/CharacterInfo.page';
+import CharacterList from './pages/character-list/CharacterList.page';
+import FavListPage from './pages/fav-list/FavList.page';
+import { MenuComponent } from './components/menu/Menu.component';
+import { LoaderComponent } from './components/loader/Loader.component';
+import { useAuth } from './context/auth/AuthContext';
 
 import { BASE_URL } from './constants';
 import './App.scss';
@@ -23,7 +23,7 @@ function App() {
           <Routes>
             <Route
               path={`${BASE_URL}`}
-              element={<Loader url={`${BASE_URL}characters`} />}
+              element={<LoaderComponent url={`${BASE_URL}characters`} />}
             />
             <Route path={`${BASE_URL}characters`} element={<CharacterList />} />
             <Route

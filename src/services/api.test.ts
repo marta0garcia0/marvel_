@@ -2,6 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { getCharacters, getComics, getCharacter } from './api';
 import { mockCharacter, mockCharacter2, mockComic } from '../__mocks__/result';
+import { PAGE_SIZE } from '../constants';
 
 const mock = new MockAdapter(axios);
 const baseURL = 'http://gateway.marvel.com/v1/public/';
@@ -21,7 +22,9 @@ describe('Marvel API Service', () => {
 
   test('getCharacters should fetch character data successfully', async () => {
     mock
-      .onGet(`${baseURL}characters?ts=${ts}&apikey=${apiKey}&hash=${hash}`)
+      .onGet(
+        `${baseURL}characters?limit=${PAGE_SIZE}&ts=${ts}&apikey=${apiKey}&hash=${hash}`
+      )
       .reply(200, mockCharacter);
 
     const response = await getCharacters(ts, hash);

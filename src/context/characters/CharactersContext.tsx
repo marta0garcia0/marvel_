@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Character, CharacterResponse } from '../services/models';
+import {
+  Character,
+  CharacterMetadataResponse,
+  CharacterResponse,
+} from '../../services/models';
 
 interface CharacterState {
   updateFilterCharacters: (props: {
@@ -7,9 +11,9 @@ interface CharacterState {
   }) => void;
   updateCharacters: (props: { characterInfo: CharacterResponse }) => void;
   characters: Character[];
-  characterInfo?: CharacterResponse;
+  characterInfo?: CharacterMetadataResponse;
   filterCharacters: Character[];
-  filterCharacterInfo?: CharacterResponse;
+  filterCharacterInfo?: CharacterMetadataResponse;
 }
 
 const CharacterContext = createContext<CharacterState | undefined>(undefined);
@@ -18,13 +22,15 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [characterInfo, setCharacterInfo] = useState<CharacterResponse>();
+  const [characterInfo, setCharacterInfo] =
+    useState<CharacterMetadataResponse>();
   const [filterCharacters, setFilterCharacters] = useState<Character[]>([]);
   const [filterCharacterInfo, setFilterCharacterInfo] =
-    useState<CharacterResponse>();
+    useState<CharacterMetadataResponse>();
 
   const updateCharacters = (props: { characterInfo: CharacterResponse }) => {
     if (props.characterInfo.offset === 0) {
+      // if page 0 reset the list
       setCharacters(props.characterInfo.results);
     } else {
       setCharacters(
@@ -33,7 +39,12 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({
           .concat(props.characterInfo.results)
       );
     }
-    setCharacterInfo(props.characterInfo);
+    setCharacterInfo({
+      offset: props.characterInfo.offset,
+      limit: props.characterInfo.limit,
+      total: props.characterInfo.total,
+      count: props.characterInfo.count,
+    });
   };
 
   const updateFilterCharacters = (props: {
@@ -47,12 +58,17 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({
         setFilterCharacters(props.characterInfo.results);
       } else {
         setFilterCharacters(
-          characters
+          filterCharacters
             .slice(0, props.characterInfo.offset)
             .concat(props.characterInfo.results)
         );
       }
-      setFilterCharacterInfo(props.characterInfo);
+      setFilterCharacterInfo({
+        offset: props.characterInfo.offset,
+        limit: props.characterInfo.limit,
+        total: props.characterInfo.total,
+        count: props.characterInfo.count,
+      });
     }
   };
 

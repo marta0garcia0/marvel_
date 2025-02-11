@@ -1,14 +1,17 @@
-@import './../../styles/colors.scss';
+@use '../../styles/colors' as *;
 .CharacterList {
-  padding: 16px 34px;
+  padding: 20px 48px;
 }
 .CharacterList-filter {
-  margin: 0 6px;
+  margin: 0px;
   font-size: 12px;
+  color: $black;
 }
 .CharacterList-cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 24px;
 }
 .CharacterList-more {
   display: flex;

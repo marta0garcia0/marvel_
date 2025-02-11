@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Character } from '../../services/models';
-import { useFav } from '../../context/FavContext';
-import { Card } from '../../components/card/Card';
-import FilterComponent from '../../components/filter/Filter.component';
-import { useCharacter } from '../../context/CharactersContext';
+import { useFav } from '../../context/fav/FavContext';
+import { CardComponent } from '../../components/card/Card.component';
+import { FilterComponent } from '../../components/filter/Filter.component';
+import { useCharacter } from '../../context/characters/CharactersContext';
 import { BASE_URL } from '../../constants';
 import './FavList.scss';
 
@@ -29,6 +29,13 @@ function FavListPage() {
           setFilter(text);
         }}
       />
+      <p className="FavList-filter">{`${
+        favList.filter(
+          fav =>
+            !filter ||
+            fav.name.toLowerCase().includes(filter.toLocaleLowerCase())
+        ).length
+      } RESULTS`}</p>
       <div className="FavList-cards">
         {favList
           .filter(
@@ -38,7 +45,8 @@ function FavListPage() {
           )
           .map(char => {
             return (
-              <Card
+              <CardComponent
+                k={char.id}
                 key={char.id}
                 character={char}
                 onClick={(id: string) =>

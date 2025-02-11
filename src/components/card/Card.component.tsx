@@ -4,14 +4,14 @@ import heartEmpty from './../../assets/heart-empty.svg';
 
 import './Card.scss';
 import { Character } from '../../services/models';
-import { useFav } from '../../context/FavContext';
+import { useFav } from '../../context/fav/FavContext';
 
-export const Card = ({
-  key,
+export const CardComponent = ({
+  k,
   character,
   onClick,
 }: {
-  key: number;
+  k: number;
   character: Character;
   onClick: (id: string) => void;
 }) => {
@@ -28,23 +28,26 @@ export const Card = ({
   };
 
   return (
-    <div className="Card" key={key + ''}>
+    <div className="Card" key={k + ''}>
       <img
         className="Card-cover"
+        alt="Card cover"
         onClick={() => onClick(character.id + '')}
         src={character.thumbnail.path + '.' + character.thumbnail.extension}
       />
       <div className="Card-footer">
-        <div className="Card-footer__left">
-          <p>{character.name.toUpperCase()}</p>
-        </div>
-        <div className="Card-footer__right">
-          <img
-            onClick={onLike}
-            className="Card-heart"
-            src={liked ? heartFull : heartEmpty}
-            alt={'like'}
-          />
+        <div className="Card-footer__curtain">
+          <div className="Card-footer__left">
+            <p>{character.name.toUpperCase()}</p>
+          </div>
+          <div className="Card-footer__right">
+            <img
+              onClick={onLike}
+              className={`Card-heart ${liked ? 'full' : ''}`}
+              src={liked ? heartFull : heartEmpty}
+              alt={'like'}
+            />
+          </div>
         </div>
       </div>
     </div>

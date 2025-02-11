@@ -1,20 +1,31 @@
 import { useState, useEffect } from 'react';
 import { getCharacters } from '../../services/api';
-import { Character, CharacterResponse } from '../../services/models';
-import { useAuth } from '../../context/AuthContext';
-import { Card } from '../../components/card/Card';
+import {
+  Character,
+  CharacterMetadataResponse,
+  CharacterResponse,
+} from '../../services/models';
+import { useAuth } from '../../context/auth/AuthContext';
+import { CardComponent } from '../../components/card/Card.component';
 import { useNavigate } from 'react-router-dom';
-import FilterComponent from '../../components/filter/Filter.component';
+import { FilterComponent } from '../../components/filter/Filter.component';
+import { useCharacter } from '../../context/characters/CharactersContext';
 import loader from './../../assets/spinner.svg';
-import { useCharacter } from '../../context/CharactersContext';
 import './CharacterList.scss';
+import { PAGE_SIZE } from '../../constants';
 
 function CharacterList() {
+  // text to filter items
   const [filter, setFilter] = useState<string>();
-  const [page, setPage] = useState<number>();
+  // page for filter search
+  const [filterPage, setFilterPage] = useState<number>(0);
+  // page without filter
+  const [page, setPage] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+  // items to display
   const [items, setItems] = useState<Character[]>([]);
-  const [itemsInfo, setItemsInfo] = useState<CharacterResponse>();
+  // metadata like limit, total, etc
+  const [itemsInfo, setItemsInfo] = useState<CharacterMetadataResponse>();
   const navigate = useNavigate();
   const { ts, hash } = useAuth();
   const {
@@ -26,22 +37,10 @@ function CharacterList() {
     filterCharacterInfo,
   } = useCharacter();
 
+  // when data from context is updated change the displayed items
   useEffect(() => {
-    setPage(0);
-  }, [ts, hash]);
-
-  const loadMore = () => {
-    setPage((page || 0) + 1);
-  };
-
-  useEffect(() => {
-    if (filter) {
-      setItems(filterCharacters);
-      setItemsInfo(filterCharacterInfo);
-    } else {
-      setItems(characters);
-      setItemsInfo(characterInfo);
-    }
+    setItems(filter ? filterCharacters : characters);
+    setItemsInfo(filter ? filterCharacterInfo : characterInfo);
   }, [
     filter,
     characterInfo,
@@ -51,45 +50,48 @@ function CharacterList() {
   ]);
 
   useEffect(() => {
+    if (filter) {
+      // if filter fetch data
+      fetchCharacters();
+    } else {
+      // instead of fetching data, get from context
+      setItems(characters);
+      setItemsInfo(characterInfo);
+    }
+  }, [filter, filterPage]);
+
+  useEffect(() => {
+    if (!filter && ts && hash) {
+      fetchCharacters();
+    }
+  }, [page, ts, hash]);
+
+  const fetchCharacters = () => {
     if (ts && hash && !loading) {
       setLoading(true);
-      getCharacters(ts, hash, filter, (page || 0) * 20)
+      getCharacters(ts, hash, filter, (filter ? filterPage : page) * PAGE_SIZE)
         .then((data: CharacterResponse) => {
           if (filter) {
             updateFilterCharacters({ characterInfo: data });
           } else {
             updateCharacters({ characterInfo: data });
+            updateFilterCharacters({});
           }
         })
         .finally(() => {
           setLoading(false);
         });
     }
-  }, [page]);
-
-  useEffect(() => {
-    if (filter && filter.length > 0) {
-      if (ts && hash && !loading) {
-        setLoading(true);
-        getCharacters(ts, hash, filter, (page || 0) * 20)
-          .then((data: CharacterResponse) => {
-            updateFilterCharacters({ characterInfo: data });
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      }
-    } else {
-      updateFilterCharacters({});
-    }
-  }, [filter]);
+  };
 
   return (
     <div className="CharacterList">
       <FilterComponent
         onChange={text => {
           setFilter(text);
-          setPage(0);
+          if (text) {
+            setFilterPage(0);
+          }
         }}
       />
       <p className="CharacterList-filter">
@@ -100,17 +102,27 @@ function CharacterList() {
           <div className="CharacterList-cards">
             {items.map(character => {
               return (
-                <Card
+                <CardComponent
                   key={character.id}
+                  k={character.id}
                   character={character}
                   onClick={(id: string) => navigate(`${id}`)}
                 />
               );
             })}
           </div>
-          {!loading && itemsInfo && itemsInfo.count < itemsInfo.total ? (
+          {!loading && itemsInfo && items.length < itemsInfo.total ? (
             <div className="CharacterList-more">
-              <button onClick={loadMore} className="CharacterList-more__button">
+              <button
+                onClick={() => {
+                  if (filter) {
+                    setFilterPage(filterPage + 1);
+                  } else {
+                    setPage(page + 1);
+                  }
+                }}
+                className="CharacterList-more__button"
+              >
                 more
               </button>
             </div>

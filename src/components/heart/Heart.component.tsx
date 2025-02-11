@@ -3,7 +3,10 @@ import heartFull from './../../assets/heart-full.svg';
 import heartEmpty from './../../assets/heart-empty.svg';
 import './Heart.scss';
 
-function Heart(props: { likes: number; onClick: () => void }) {
+export const HeartComponent = (props: {
+  likes: number;
+  onClick: () => void;
+}) => {
   useEffect(() => {}, []);
   return (
     <div className="Heart">
@@ -16,6 +19,4 @@ function Heart(props: { likes: number; onClick: () => void }) {
       <span className="Heart-text">{props.likes}</span>
     </div>
   );
-}
-
-export default Heart;
+};

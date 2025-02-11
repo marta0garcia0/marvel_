@@ -1,21 +1,23 @@
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+import { useAuth } from './context/auth/AuthContext';
+import { useFav } from './context/fav/FavContext';
+
+jest.mock('./context/auth/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
+
+jest.mock('./context/fav/FavContext', () => ({
+  useFav: jest.fn(),
+}));
+
 jest.mock('./constants', () => ({
   ENVIRONMENT: 'test',
   VITE_PUBLIC_KEY: 'mockedApiKey',
   BASE_URL: '/',
 }));
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import App from './App';
-import { useAuth } from './context/AuthContext';
-import { useFav } from './context/FavContext';
 
-jest.mock('./context/AuthContext', () => ({
-  useAuth: jest.fn(),
-}));
-
-jest.mock('./context/FavContext', () => ({
-  useFav: jest.fn(),
-}));
 describe('App Component', () => {
   beforeEach(() => {
     (useAuth as jest.Mock).mockReturnValue({ updateHash: jest.fn() });

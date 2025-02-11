@@ -5,7 +5,7 @@ import {
   ComicResponse,
   ComicResponseAPI,
 } from './models';
-import { VITE_PUBLIC_KEY } from '../constants';
+import { PAGE_SIZE, VITE_PUBLIC_KEY } from '../constants';
 
 const baseURL = 'http://gateway.marvel.com/v1/public/';
 
@@ -18,7 +18,7 @@ export const getCharacters = async (
   const { data } = await axios.get<CharacterResponseAPI>(
     baseURL +
       'characters' +
-      `?ts=${ts}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}` +
+      `?limit=${PAGE_SIZE}&ts=${ts}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}` +
       `${nameStartsWith ? '&nameStartsWith=' + nameStartsWith : ''}` +
       `${offset ? '&offset=' + offset : ''}`
   );

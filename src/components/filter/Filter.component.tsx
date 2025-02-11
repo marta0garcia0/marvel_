@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import search from './../../assets/search.svg';
 import './Filter.scss';
+import { FILTER_TIME } from '../../constants';
 
-function FilterComponent(props: { onChange: (text: string) => void }) {
+export const FilterComponent = (props: {
+  onChange: (text: string) => void;
+}) => {
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       props.onChange(inputValue);
-    }, 1000);
+    }, FILTER_TIME);
 
     return () => {
       clearTimeout(timeoutId);
@@ -25,6 +28,4 @@ function FilterComponent(props: { onChange: (text: string) => void }) {
       />
     </div>
   );
-}
-
-export default FilterComponent;
+};

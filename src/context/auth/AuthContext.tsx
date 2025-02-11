@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import md5 from 'md5';
+import { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY } from '../../constants';
 
 interface AuthState {
   updateHash: () => void;
@@ -19,8 +20,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const updateHash = () => {
     try {
-      const privateKey = import.meta.env.VITE_PRIVATE_KEY;
-      const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+      const privateKey = VITE_PRIVATE_KEY;
+      const publicKey = VITE_PUBLIC_KEY;
 
       if (!privateKey || !publicKey) {
         throw new Error('Missing environment variables');
