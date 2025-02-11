@@ -5,7 +5,7 @@ import cssnano from 'cssnano';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === 'production' ? '/marvel/' : '/',
+  base: mode === 'production' ? '/marvel_/' : '/',
   build: {
     outDir: 'dist',
     rollupOptions: {

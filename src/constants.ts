@@ -4,7 +4,7 @@ const {
   VITE_PRIVATE_KEY: VPPK,
 } = import.meta.env;
 
-export const BASE_URL = ENVIRONMENT === 'production' ? '/marvel/' : '/';
+export const BASE_URL = ENVIRONMENT === 'production' ? '/marvel_/' : '/';
 
 export const VITE_PUBLIC_KEY = VPK;
 export const VITE_PRIVATE_KEY = VPPK;
